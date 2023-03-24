@@ -27,4 +27,33 @@
         android:text="Sair"
         android:layout_marginTop="32dp" />
 
+    <EditText
+            android:id="@+id/edtPesquisa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pesquisar"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textSize="16sp" />
+
+    <ListView
+            android:id="@+id/listaClientes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/edtPesquisa"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:padding="8dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAdicionar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_add"
+            android:tint="@android:color/white" />
+
 </LinearLayout>
