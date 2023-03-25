@@ -1,26 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorSecondary">
 
-    <ListView
-        android:id="@+id/client_item"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/clientesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="16dp"
-        android:padding="16dp" />
+        android:padding="8dp"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_client_button"
+
+    <Button
+        android:id="@+id/adicionarClienteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add"
-        android:contentDescription="@string/add_client"
-        android:elevation="4dp" />
-
+        android:text="Adicionar Cliente" />
 </RelativeLayout>

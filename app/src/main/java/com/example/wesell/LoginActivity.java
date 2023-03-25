@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         mEmailEditText = findViewById(R.id.email_edit_text);
         mPasswordEditText = findViewById(R.id.password_edit_text);
         mLoginButton = findViewById(R.id.login_button);
+
         registerButton = findViewById(R.id.register_button);
         mAuth = FirebaseAuth.getInstance();
 

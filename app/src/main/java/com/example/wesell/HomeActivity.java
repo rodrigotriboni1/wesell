@@ -1,93 +1,109 @@
 package com.example.wesell;
 
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
+    private DatabaseReference mDatabase;
 
-    private ListView mClientsListView;
-    private ClientAdapter mClientAdapter;
-    private DatabaseReference mDatabaseReference;
-    private ArrayList<Client> mClientsList;
+    private List<Cliente> mClientes;
+    private ClienteAdapter mAdapter;
+
+    private RecyclerView mClientesRecyclerView;
+    private Button mAdicionarClienteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        FirebaseApp.initializeApp(this);
 
-        mClientsListView = findViewById(R.id.client_item);
-        FloatingActionButton addClientButton = findViewById(R.id.add_client_button);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mClientsList = new ArrayList<>();
-        mClientAdapter = new ClientAdapter(this, mClientsList);
-        mClientsListView.setAdapter(mClientAdapter);
+        mClientes = new ArrayList<>();
+        mAdapter = new ClienteAdapter(mClientes);
 
-        mDatabaseReference = FirebaseUtils.getDatabase().child("clients");
-        mDatabaseReference.addChildEventListener(new ChildEventListener() {
+        mClientesRecyclerView = findViewById(R.id.clientesRecyclerView);
+        mClientesRecyclerView.setAdapter(mAdapter);
+        mClientesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mAdicionarClienteButton = findViewById(R.id.adicionarClienteButton);
+        mAdicionarClienteButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                Client client = dataSnapshot.getValue(Client.class);
-                mClientsList.add(client);
-                mClientAdapter.notifyDataSetChanged();
+            public void onClick(View v) {
+                adicionarCliente();
             }
+        });
 
+        buscarClientes();
+    }
+
+    private void adicionarCliente() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Adicionar Cliente");
+
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_adicionar_cliente, null);
+
+        final EditText nomeEditText = dialogView.findViewById(R.id.nomeEditText);
+        final EditText emailEditText = dialogView.findViewById(R.id.emailEditText);
+        final EditText telefoneEditText = dialogView.findViewById(R.id.telefoneEditText);
+
+        builder.setView(dialogView);
+
+        builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                Client client = dataSnapshot.getValue(Client.class);
-                int index = mClientsList.indexOf(client);
-                mClientsList.set(index, client);
-                mClientAdapter.notifyDataSetChanged();
+            public void onClick(DialogInterface dialog, int which) {
+                String nome = nomeEditText.getText().toString();
+                String email = emailEditText.getText().toString();
+                String telefone = telefoneEditText.getText().toString();
+
+                Cliente cliente = new Cliente(nome, email, telefone);
+                mDatabase.child("clientes").push().setValue(cliente);
             }
+        });
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                Client client = dataSnapshot.getValue(Client.class);
-                mClientsList.remove(client);
-                mClientAdapter.notifyDataSetChanged();
-            }
+        builder.setNegativeButton("Cancelar", null);
 
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void buscarClientes() {
+        mDatabase.child("clientes").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String previousChildName) {
-                // Não é necessário implementar essa função para a nossa aplicação
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mClientes.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Cliente cliente = dataSnapshot.getValue(Cliente.class);
+                    mClientes.add(cliente);
+                }
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Não é necessário implementar essa função para a nossa aplicação
-            }
-        });
-
-        mClientsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Client client = mClientsList.get(position);
-                Intent intent = new Intent(HomeActivity.this, EditClientActivity.class);
-                intent.putExtra("client_id", client.getId());
-                startActivity(intent);
-            }
-        });
-
-        addClientButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, AddClientActivity.class);
-                startActivity(intent);
+                Toast.makeText(HomeActivity.this, "Não foi possível buscar os clientes.", Toast.LENGTH_SHORT).show();
             }
         });
     }
