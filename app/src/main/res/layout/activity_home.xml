@@ -1,59 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_foreground"
-        android:layout_gravity="center"
-        android:layout_marginBottom="32dp" />
-
-    <TextView
-        android:id="@+id/welcome_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:layout_marginTop="16dp" />
-
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sair"
-        android:layout_marginTop="32dp" />
-
-    <EditText
-            android:id="@+id/edtPesquisa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Pesquisar"
-            android:inputType="text"
-            android:maxLines="1"
-            android:padding="8dp"
-            android:textSize="16sp" />
+    android:layout_height="match_parent">
 
     <ListView
-            android:id="@+id/listaClientes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/edtPesquisa"
-            android:divider="@null"
-            android:dividerHeight="0dp"
-            android:padding="8dp" />
+        android:id="@+id/client_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="16dp"
+        android:padding="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAdicionar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_add"
-            android:tint="@android:color/white" />
+        android:id="@+id/add_client_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_add"
+        android:contentDescription="@string/add_client"
+        android:elevation="4dp" />
 
-</LinearLayout>
+</RelativeLayout>
