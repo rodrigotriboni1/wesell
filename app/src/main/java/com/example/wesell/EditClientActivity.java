@@ -1,6 +1,7 @@
 package com.example.wesell;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,26 +38,22 @@ public class EditClientActivity extends AppCompatActivity {
         mClientId = getIntent().getStringExtra("client_id");
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("clients");
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     // recupera o objeto Client do snapshot
                     Client client = dataSnapshot.getValue(Client.class);
-
-                    // verifica se o objeto é nulo
-                    if (client != null) {
-                        // atualiza a UI com os dados do cliente
-                        mNameEditText.setText(client.getName());
-                        mEmailEditText.setText(client.getEmail());
-                        mPhoneEditText.setText(client.getPhone());
-                    }
+                    mNameEditText.setText(client.getName());
+                    mEmailEditText.setText(client.getEmail());
+                    mPhoneEditText.setText(client.getPhone());
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.e("EditClientActivity", "Erro ao buscar informações do cliente", error.toException());
+                Toast.makeText(EditClientActivity.this, "Erro ao buscar informações do cliente", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -78,9 +75,9 @@ public class EditClientActivity extends AppCompatActivity {
             Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
             return;
         }
-        String id = mDatabaseReference.push().getKey();
-        Client client = new Client(id,name, phone);
-        mDatabaseReference.child(id).setValue(client);
+
+        Client client = new Client(mClientId, name, phone, email);
+        mDatabaseReference.setValue(client);
 
         Toast.makeText(this, "Cliente atualizado com sucesso!", Toast.LENGTH_SHORT).show();
         finish();

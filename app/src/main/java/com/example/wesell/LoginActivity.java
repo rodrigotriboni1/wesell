@@ -11,13 +11,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.wesell.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import android.view.View;
-import android.widget.Button;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEmailEditText;
     private EditText mPasswordEditText;
     private Button mLoginButton;
+    private Button registerButton;
     private FirebaseAuth mAuth;
 
     @Override
@@ -35,14 +33,14 @@ public class LoginActivity extends AppCompatActivity {
         mEmailEditText = findViewById(R.id.email_edit_text);
         mPasswordEditText = findViewById(R.id.password_edit_text);
         mLoginButton = findViewById(R.id.login_button);
-        Button registerButton = findViewById(R.id.register_button);
+        registerButton = findViewById(R.id.register_button);
         mAuth = FirebaseAuth.getInstance();
 
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
             }
