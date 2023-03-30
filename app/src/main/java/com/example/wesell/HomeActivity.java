@@ -1,6 +1,7 @@
 package com.example.wesell;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +57,20 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         buscarClientes();
+
+        mClientesRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mClientesRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Cliente cliente = mClientes.get(position);
+                Intent intent = new Intent(HomeActivity.this, DetalhesClienteActivity.class);
+                intent.putExtra("cliente", (Serializable) cliente);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+            }
+        }));
     }
 
     private void adicionarCliente() {
@@ -78,7 +94,7 @@ public class HomeActivity extends AppCompatActivity {
                 String email = emailEditText.getText().toString();
                 String telefone = telefoneEditText.getText().toString();
 
-                Cliente cliente = new Cliente(nome, email, telefone);
+                Cliente cliente = new Cliente(nome, telefone, email);
                 mDatabase.child("clientes").push().setValue(cliente);
             }
         });

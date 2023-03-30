@@ -1,26 +1,66 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/nomeClienteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome do Cliente"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
 
     <TextView
-        android:id="@+id/nomeTextView"
-        android:layout_width="match_parent"
+        android:id="@+id/emailClienteTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:text="Email do Cliente"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/nomeClienteTextView"/>
 
     <TextView
-        android:id="@+id/emailTextView"
-        android:layout_width="match_parent"
+        android:id="@+id/telefoneClienteTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp" />
+        android:text="Telefone do Cliente"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/emailClienteTextView"/>
 
     <TextView
-        android:id="@+id/telefoneTextView"
-        android:layout_width="match_parent"
+        android:id="@+id/vendasTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp" />
+        android:text="Vendas"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_below="@id/telefoneClienteTextView"/>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/adicionarVendaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adicionar Venda"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/vendasTextView"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vendasRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="680dp"
+        android:layout_below="@id/adicionarVendaButton"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="2dp" />
+
+</RelativeLayout>
