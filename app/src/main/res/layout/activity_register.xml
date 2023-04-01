@@ -1,51 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".RegisterActivity">
 
-    <ImageView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_foreground"
-        android:layout_gravity="center"
-        android:layout_marginBottom="32dp" />
+        android:text="Cadastro"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/name_edit_text"
+        android:id="@+id/nameField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome" />
+        android:layout_marginTop="16dp"
+        android:hint="Digite o seu nome"
+        android:inputType="text" />
 
     <EditText
-        android:id="@+id/last_name_edit_text"
+        android:id="@+id/emailField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Sobrenome"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:hint="Digite o seu email"
+        android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/email_edit_text"
+        android:id="@+id/passwordField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:hint="Digite a sua senha"
+        android:inputType="textPassword" />
 
-    <EditText
-        android:id="@+id/password_edit_text"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/uuidTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Senha"
-        android:inputType="textPassword"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:text="UUID: "
+        android:textSize="16sp" />
 
     <Button
-        android:id="@+id/register_button"
+        android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Registrar"
-        android:layout_marginTop="32dp" />
+        android:layout_marginTop="16dp"
+        android:text="Cadastrar" />
 
 </LinearLayout>
