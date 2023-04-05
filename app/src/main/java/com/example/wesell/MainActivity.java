@@ -78,16 +78,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        clienteAdapter.setOnItemClickListener(new ClienteAdapter.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
-                Cliente cliente = clienteList.get(position);
+            public void onItemClick(View view, int position) {
+                Cliente clienteSelecionado = clienteList.get(position);
                 Intent intent = new Intent(MainActivity.this, AddVendaActivity.class);
-                intent.putExtra("clienteId", cliente.getId());
+                intent.putExtra("clienteId", clienteSelecionado.getId());
                 startActivity(intent);
             }
-        });
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+                // nada a fazer
+            }
+        }));
     }
+
+
 
     private void adicionarCliente() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

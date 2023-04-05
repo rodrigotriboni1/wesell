@@ -11,15 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHolder> {
-    private final OnClienteClickListener listener = null;
+    private OnItemClickListener listener = null;
     private List<Cliente> mClientes;
-    private OnClienteClickListener mListener;
+    private OnItemClickListener mListener;
 
-    public interface OnClienteClickListener {
+    public interface OnItemClickListener {
         void onClienteClick(Cliente cliente);
     }
 
-    public ClienteAdapter(List<Cliente> clientes) {
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public ClienteAdapter(MainActivity mainActivity, List<Cliente> clientes) {
         mClientes = clientes;
         mListener = listener;
     }

@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_opcao1"
+        android:title="Opção 1"
+        android:icon="@drawable/ic_menu_opcao1"
+        android:onClick="opcao1Selecionada" />
+    <item
+        android:id="@+id/menu_opcao2"
+        android:title="Opção 2"
+        android:icon="@drawable/ic_menu_opcao2"
+        android:onClick="opcao2Selecionada" />
+</menu>
