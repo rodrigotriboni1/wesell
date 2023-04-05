@@ -19,6 +19,8 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHold
     private List<Cliente> mClientes;
     private OnItemClickListener mListener;
 
+    private ViewGroup parent;
+
     public interface OnItemClickListener {
         void onClienteClick(Cliente cliente);
     }
@@ -60,8 +62,10 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHold
         });
     }
     private void excluirCliente(Cliente cliente) {
+        DatabaseReference vendaRef = FirebaseDatabase.getInstance().getReference("vendas").child(cliente.getId());
         DatabaseReference clientesRef = FirebaseDatabase.getInstance().getReference("clientes").child(cliente.getId());
         clientesRef.removeValue();
+        vendaRef.removeValue();
     }
 
     @Override

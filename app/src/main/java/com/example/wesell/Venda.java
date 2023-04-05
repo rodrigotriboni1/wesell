@@ -9,6 +9,9 @@ public class Venda {
     private String clienteId;
     private String valorVenda;
     private String nomeCliente;
+
+    private String dataVenda;
+
     private RecyclerView recyclerView;
 
 
@@ -17,11 +20,20 @@ public class Venda {
     }
 
 
-    public Venda(String vendaId, String clienteId, String valorVenda, String nomeCliente) {
+    public Venda(String vendaId, String clienteId, String valorVenda, String nomeCliente, String dataVenda) {
         this.vendaId = vendaId;
         this.clienteId = clienteId;
         this.valorVenda = valorVenda;
         this.nomeCliente = nomeCliente;
+        this.dataVenda = dataVenda;
+    }
+
+    public String getDataVenda() {
+        return dataVenda;
+    }
+
+    public void setDataVenda(String dataVenda) {
+        this.dataVenda = dataVenda;
     }
 
     public String getVendaId() {

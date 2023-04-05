@@ -1,5 +1,6 @@
 package com.example.wesell;
 
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -18,6 +20,8 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
 
     private List<Venda> vendas;
 
+    private ViewGroup parent;
+
     public VendaAdapter(List<Venda> vendas) {
         this.vendas = vendas;
     }
@@ -25,6 +29,7 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        this.parent = parent;
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_venda, parent, false);
         return new ViewHolder(view);
@@ -35,6 +40,7 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
         Venda venda = vendas.get(position);
         holder.textViewNomeCliente.setText(venda.getNomeCliente());
         holder.textViewValorVenda.setText(venda.getValorVenda());
+        holder.TextViewDataVenda.setText(venda.getDataVenda());
 
         holder.buttonExcluirVenda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,9 +50,20 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
         });
     }
     private void excluirVenda(Venda venda) {
-        DatabaseReference vendaRef = FirebaseDatabase.getInstance().getReference("vendas").child(venda.getVendaId());
-        vendaRef.removeValue();
+        AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext());
+        builder.setMessage("Tem certeza que deseja excluir esta venda?");
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                DatabaseReference vendaRef = FirebaseDatabase.getInstance().getReference("vendas").child(venda.getVendaId());
+                vendaRef.removeValue();
+            }
+        });
+        builder.setNegativeButton("Não", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
+
 
     @Override
     public int getItemCount() {
@@ -58,13 +75,17 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
         public TextView textViewNomeCliente;
         public TextView textViewValorVenda;
 
+        public TextView TextViewDataVenda;
+
         public Button buttonExcluirVenda;
 
         public ViewHolder(View itemView) {
             super(itemView);
             textViewNomeCliente = itemView.findViewById(R.id.textViewProduto);
             textViewValorVenda = itemView.findViewById(R.id.textViewValor);
+            TextViewDataVenda = itemView.findViewById(R.id.TextViewDataVenda);
             buttonExcluirVenda = itemView.findViewById(R.id.buttonExcluirVenda);
+
 
         }
     }

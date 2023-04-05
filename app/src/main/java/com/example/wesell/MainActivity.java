@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -15,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ClienteAdapter clienteAdapter;
+
+    private Button btnAdicionarCliente;
     private List<Cliente> clienteList;
 
     private FirebaseAuth mAuth;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         clienteList = new ArrayList<>();
         clienteAdapter = new ClienteAdapter(this, clienteList);
         recyclerView.setAdapter(clienteAdapter);
+        btnAdicionarCliente = findViewById(R.id.btnAdicionarCliente);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user.getUid();
@@ -70,8 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
+        btnAdicionarCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 adicionarCliente();

@@ -7,4 +7,6 @@
     <string name="nome_venda_hint">Nome do Produto</string>
     <string name="valor_venda_hint">Valor da venda</string>
     <string name="salvar_button_text">Adicionar venda</string>
+    <string name="data_venda_hint">Digite uma data</string>
+    <string name="settings_name">Perfil</string>
 </resources>
