@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLongItemClick(View view, int position) {
-                // nada a fazer
+                excluirCliente(position);
             }
         }));
     }
@@ -131,6 +131,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.show();
+    }
+    private void excluirCliente(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Excluir cliente");
+        builder.setMessage("Tem certeza que deseja excluir este cliente?");
+
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Cliente clienteSelecionado = clienteList.get(position);
+                databaseReference.child(clienteSelecionado.getId()).removeValue();
+                Toast.makeText(MainActivity.this, "Cliente excluído com sucesso!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();

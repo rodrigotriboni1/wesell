@@ -98,16 +98,20 @@ public class AddVendaActivity extends AppCompatActivity {
     // Método para salvar a nova venda no Firebase Realtime Database
     private void salvarVenda() {
         String valorVenda = editTextValorVenda.getText().toString().trim();
-        String nomeVenda = editTextNomeVenda.getText().toString().trim();
+        String nomeCliente = editTextNomeVenda.getText().toString().trim();
 
         if (TextUtils.isEmpty(valorVenda)) {
             editTextValorVenda.setError("Informe o valor da venda");
             return;
         }
+        if (TextUtils.isEmpty(nomeCliente)) {
+            editTextNomeVenda.setError("Informe o nome do produto");
+            return;
+        }
 
         // Cria um novo objeto Venda
         String vendaId = mDatabase.child("vendas").push().getKey();
-        Venda venda = new Venda(vendaId, clienteId, valorVenda);
+        Venda venda = new Venda(vendaId, clienteId, valorVenda,nomeCliente);
 
         // Salva a nova venda no Firebase Realtime Database
         mDatabase.child("vendas").child(vendaId).setValue(venda)
@@ -152,6 +156,6 @@ public class AddVendaActivity extends AppCompatActivity {
                             });
                         }
                     }
-    });
-}
+        });
+    }
 }

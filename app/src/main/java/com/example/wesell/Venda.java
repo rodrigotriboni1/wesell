@@ -17,10 +17,11 @@ public class Venda {
     }
 
 
-    public Venda(String vendaId, String clienteId, String valorVenda) {
+    public Venda(String vendaId, String clienteId, String valorVenda, String nomeCliente) {
         this.vendaId = vendaId;
         this.clienteId = clienteId;
         this.valorVenda = valorVenda;
+        this.nomeCliente = nomeCliente;
     }
 
     public String getVendaId() {
@@ -48,7 +49,11 @@ public class Venda {
     }
 
     public CharSequence getNomeCliente() {
-        return null;
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
     }
 
 }
