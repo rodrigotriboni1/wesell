@@ -45,6 +45,7 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
         holder.textViewNomeCliente.setText(venda.getNomeCliente());
         holder.textViewValorVenda.setText(venda.getValorVenda());
         holder.TextViewDataVenda.setText(venda.getDataVenda());
+        holder.TextViewQuantidadeVenda.setText(venda.getQuantidadeVenda());
 
         holder.buttonExcluirVenda.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +54,7 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
             }
         });
     }
-    private void excluirVenda(Venda venda) {
+    public void excluirVenda(Venda venda) {
         AlertDialog.Builder builder = new AlertDialog.Builder(parent.getContext());
         builder.setMessage("Tem certeza que deseja excluir esta venda?");
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
@@ -83,6 +84,8 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
 
         public TextView TextViewDataVenda;
 
+        public TextView TextViewQuantidadeVenda;
+
         public Button buttonExcluirVenda;
 
         public ViewHolder(View itemView) {
@@ -90,6 +93,7 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
             textViewNomeCliente = itemView.findViewById(R.id.textViewProduto);
             textViewValorVenda = itemView.findViewById(R.id.textViewValor);
             TextViewDataVenda = itemView.findViewById(R.id.TextViewDataVenda);
+            TextViewQuantidadeVenda = itemView.findViewById(R.id.TextViewQuantidadeVenda);
             buttonExcluirVenda = itemView.findViewById(R.id.buttonExcluirVenda);
 
 

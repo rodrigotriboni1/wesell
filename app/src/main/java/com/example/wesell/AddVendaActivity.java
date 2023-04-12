@@ -34,6 +34,8 @@ public class AddVendaActivity extends AppCompatActivity {
     private EditText editTextValorVenda;
     private EditText editTextNomeVenda;
     private EditText editTextDataVenda;
+
+    private EditText editTextQuantidadeVenda;
     private Button buttonSalvarVenda;
     private RecyclerView recyclerViewVendas;
 
@@ -65,6 +67,7 @@ public class AddVendaActivity extends AppCompatActivity {
         editTextValorVenda = findViewById(R.id.editTextValorVenda);
         editTextNomeVenda = findViewById(R.id.editTextNomeVenda);
         editTextDataVenda = findViewById(R.id.editTextDataVenda);
+        editTextQuantidadeVenda = findViewById(R.id.editTextQuantidadeVenda);
         buttonSalvarVenda = findViewById(R.id.buttonSalvarVenda);
         recyclerViewVendas = findViewById(R.id.recyclerViewVendas);
 
@@ -132,6 +135,7 @@ public class AddVendaActivity extends AppCompatActivity {
         String valorVenda = editTextValorVenda.getText().toString().trim();
         String nomeCliente = editTextNomeVenda.getText().toString().trim();
         String dataVenda = editTextDataVenda.getText().toString().trim();
+        String quantidadeVenda = editTextQuantidadeVenda.getText().toString().trim();
 
         if (TextUtils.isEmpty(valorVenda)) {
             editTextValorVenda.setError("Informe o valor da venda");
@@ -146,7 +150,7 @@ public class AddVendaActivity extends AppCompatActivity {
         String vendaId = mDatabase.push().getKey();
 
         String id = mDatabase.push().getKey();
-        Venda venda = new Venda(vendaId, clienteId, valorVenda, nomeCliente, dataVenda);
+        Venda venda = new Venda(vendaId, clienteId, valorVenda, nomeCliente, dataVenda, quantidadeVenda);
 
 // Salva a nova venda no Firebase Realtime Database
         mDatabase.child(vendaId).setValue(venda)
@@ -156,6 +160,7 @@ public class AddVendaActivity extends AppCompatActivity {
                         editTextValorVenda.setText("");
                         editTextNomeVenda.setText("");
                         editTextDataVenda.setText("");
+                        editTextQuantidadeVenda.setText("");
 
                         // Limpa os campos de texto após a venda ser salva
                         Toast.makeText(AddVendaActivity.this, "Venda salva com sucesso", Toast.LENGTH_SHORT).show();

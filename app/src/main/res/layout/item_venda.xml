@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -37,15 +38,21 @@
             android:textColor="@color/gray"
             android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/TextViewQuantidadeVenda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Quantidade de Vendas"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+
         <Button
             android:id="@+id/buttonExcluirVenda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Excluir"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"/>
+            android:text="Excluir" />
 
     </LinearLayout>
 

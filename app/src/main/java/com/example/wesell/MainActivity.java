@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private List<Cliente> clienteList;
 
     private FirebaseAuth mAuth;
+
+    private DatabaseReference mdatabase;
     private DatabaseReference databaseReference;
 
     @Override
@@ -54,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user.getUid();
+
+        mdatabase = FirebaseDatabase.getInstance().getReference("vendas").child(userId);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("clientes").child(userId);
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -151,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Cliente clienteSelecionado = clienteList.get(position);
                 databaseReference.child(clienteSelecionado.getId()).removeValue();
+                mdatabase.child(clienteSelecionado.getId()).removeValue();
                 Toast.makeText(MainActivity.this, "Cliente excluído com sucesso!", Toast.LENGTH_SHORT).show();
             }
         });

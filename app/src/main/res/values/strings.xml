@@ -9,4 +9,6 @@
     <string name="salvar_button_text">Adicionar venda</string>
     <string name="data_venda_hint">Digite uma data</string>
     <string name="settings_name">Perfil</string>
+    <string name="quantidade_venda_hint">Quantidade</string>
+    <string name="btn_salvar_venda">Adicionar venda</string>
 </resources>
