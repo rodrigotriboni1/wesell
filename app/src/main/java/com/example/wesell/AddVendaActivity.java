@@ -42,8 +42,6 @@ public class AddVendaActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private RecyclerView recyclerView;
     private DatabaseReference mDatabase;
-
-    private DatabaseReference databaseReference;
     private VendaAdapter vendaAdapter;
     private List<Venda> listaVendas;
 
@@ -88,10 +86,10 @@ public class AddVendaActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user.getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference("vendas").child(userId);
+        mDatabase = FirebaseDatabase.getInstance().getReference("vendas").child(userId).child(clienteId);
 
         // Carrega as vendas do cliente do Firebase Realtime Database
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        mDatabase.orderByChild("clienteId").equalTo(clienteId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listaVendas.clear();
@@ -145,14 +143,13 @@ public class AddVendaActivity extends AppCompatActivity {
         }
 
 // Cria um novo objeto Venda
-        String vendaId = mDatabase.child("vendas").push().getKey();
+        String vendaId = mDatabase.push().getKey();
 
-        String id = databaseReference.push().getKey();
+        String id = mDatabase.push().getKey();
         Venda venda = new Venda(vendaId, clienteId, valorVenda, nomeCliente, dataVenda);
-        databaseReference.child(id).setValue(venda);
 
 // Salva a nova venda no Firebase Realtime Database
-        mDatabase.child("vendas").child(vendaId).setValue(venda)
+        mDatabase.child(vendaId).setValue(venda)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

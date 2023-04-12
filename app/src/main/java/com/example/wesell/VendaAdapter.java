@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -19,6 +21,8 @@ import java.util.List;
 public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> {
 
     private List<Venda> vendas;
+
+    private DatabaseReference mDatabase;
 
     private ViewGroup parent;
 
@@ -55,7 +59,9 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                DatabaseReference vendaRef = FirebaseDatabase.getInstance().getReference("vendas").child(venda.getVendaId());
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String userId = user.getUid();
+                DatabaseReference vendaRef = FirebaseDatabase.getInstance().getReference("vendas").child(userId).child(venda.getClienteId()).child(venda.getVendaId());
                 vendaRef.removeValue();
             }
         });
