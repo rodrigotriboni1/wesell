@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +43,7 @@ public class AddVendaActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DatabaseReference mDatabase;
 
+    private DatabaseReference databaseReference;
     private VendaAdapter vendaAdapter;
     private List<Venda> listaVendas;
 
@@ -58,6 +60,8 @@ public class AddVendaActivity extends AppCompatActivity {
         // Inicializa o Firebase Auth e o Firebase Database
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
 
         // Configura as views da Activity
         editTextValorVenda = findViewById(R.id.editTextValorVenda);
@@ -82,8 +86,12 @@ public class AddVendaActivity extends AppCompatActivity {
         recyclerViewVendas.setItemAnimator(new DefaultItemAnimator());
         recyclerViewVendas.setAdapter(vendaAdapter);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userId = user.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference("vendas").child(userId);
+
         // Carrega as vendas do cliente do Firebase Realtime Database
-        mDatabase.child("vendas").orderByChild("clienteId").equalTo(clienteId).addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 listaVendas.clear();
@@ -138,7 +146,10 @@ public class AddVendaActivity extends AppCompatActivity {
 
 // Cria um novo objeto Venda
         String vendaId = mDatabase.child("vendas").push().getKey();
+
+        String id = databaseReference.push().getKey();
         Venda venda = new Venda(vendaId, clienteId, valorVenda, nomeCliente, dataVenda);
+        databaseReference.child(id).setValue(venda);
 
 // Salva a nova venda no Firebase Realtime Database
         mDatabase.child("vendas").child(vendaId).setValue(venda)
