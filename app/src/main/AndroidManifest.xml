@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wesell"
         android:enableOnBackInvokedCallback="true">
-        <activity android:name=".LoginActivity"
+        <activity android:name=".cadastro.LoginActivity"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,8 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".AddVendaActivity"></activity>
+        <activity android:name=".cadastro.RegisterActivity"></activity>
+        <activity android:name=".venda.AddVendaActivity"></activity>
 
     </application>
 

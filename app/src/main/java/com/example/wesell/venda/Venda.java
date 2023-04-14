@@ -1,4 +1,4 @@
-package com.example.wesell;
+package com.example.wesell.venda;
 
 import androidx.recyclerview.widget.RecyclerView;
 

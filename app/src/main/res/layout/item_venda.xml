@@ -1,17 +1,17 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:orientation="horizontal"
     android:background="@android:color/white"
-    android:elevation="2dp">
+    android:padding="16dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textViewProduto"
@@ -42,18 +42,16 @@
             android:id="@+id/TextViewQuantidadeVenda"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="Quantidade de Vendas"
             android:textColor="@color/gray"
             android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/buttonExcluirVenda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="Excluir" />
-
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+    <Button
+        android:id="@+id/buttonExcluirVenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Excluir" />
+
+</LinearLayout>

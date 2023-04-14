@@ -1,4 +1,4 @@
-package com.example.wesell;
+package com.example.wesell.cliente;
 
 public class Cliente {
     private String id;

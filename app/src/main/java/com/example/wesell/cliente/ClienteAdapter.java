@@ -1,14 +1,15 @@
-package com.example.wesell;
+package com.example.wesell.cliente;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wesell.MainActivity;
+import com.example.wesell.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -45,14 +46,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Cliente cliente = mClientes.get(position);
         holder.textViewNome.setText(cliente.getNome());
-        holder.textViewEmail.setText(cliente.getEmail());
 
-        holder.buttonExcluirCliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                excluirCliente(cliente);
-            }
-        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,15 +70,10 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHold
     public class ViewHolder  extends RecyclerView.ViewHolder {
 
         public TextView textViewNome;
-        public TextView textViewEmail;
-
-        public Button buttonExcluirCliente;
 
         public ViewHolder (@NonNull View itemView) {
             super(itemView);
             textViewNome = itemView.findViewById(R.id.textViewNome);
-            textViewEmail = itemView.findViewById(R.id.textViewEmail);
-            buttonExcluirCliente = itemView.findViewById(R.id.buttonExcluirCliente);
         }
     }
 

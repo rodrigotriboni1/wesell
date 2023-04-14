@@ -1,7 +1,8 @@
-package com.example.wesell;
+package com.example.wesell.cadastro;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wesell.MainActivity;
+import com.example.wesell.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -35,7 +38,13 @@ public class LoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
+                String email = mEmailField.getText().toString().trim();
+                String password = mPasswordField.getText().toString().trim();
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(LoginActivity.this, "Email ou senha não podem estar em branco", Toast.LENGTH_SHORT).show();
+                } else {
+                    signIn(email, password);
+                }
             }
         });
 
@@ -55,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Autenticação bem-sucedida", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Autenticação concluida com sucesso", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -66,4 +75,3 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 }
-

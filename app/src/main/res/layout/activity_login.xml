@@ -8,76 +8,89 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/pagebkg"
-    tools:context=".LoginActivity">
+    tools:context=".cadastro.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Placeholder for any top content that you want to add -->
+
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_margin="0dp"
+        android:layout_marginEnd="0dp"
         app:cardCornerRadius="30dp"
-        app:cardElevation="20dp">
+        app:cardElevation="0dp"
+        tools:layout_marginBottom="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:padding="24dp"
-            android:background="@drawable/custom_edittext">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Login"
-                android:textSize="36sp"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:textColor="@color/colorAccent"/>
+            android:orientation="vertical"
+            android:padding="24dp">
 
             <EditText
+                android:id="@+id/emailField"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/emailField"
-                android:background="@drawable/custom_edittext"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="40dp"
-                android:padding="8dp"
-                android:hint="Email"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/ic_baseline_person_pin_24"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
+                android:hint="Email"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <EditText
+                android:id="@+id/passwordField"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/passwordField"
-                android:background="@drawable/custom_edittext"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="Password"
-                android:inputType="textPassword"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/custom_edittext"
                 android:drawableLeft="@drawable/ic_baseline_lock_24"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black"/>
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Login"
                 android:id="@+id/signInButton"
-                android:textSize="18sp"
-                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
                 android:backgroundTint="@color/colorAccent"
-                app:cornerRadius = "20dp"/>
+                android:text="Login"
+                android:textSize="18sp"
+                app:cornerRadius="10dp" />
 
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Registrar-se"
                 android:id="@+id/signUpButton"
-                android:textSize="18sp"
-                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
                 android:backgroundTint="@color/colorAccent"
-                app:cornerRadius = "20dp"/>
+                android:text="Registrar-se"
+                android:textSize="18sp"
+                app:cornerRadius="10dp" />
 
         </LinearLayout>
 

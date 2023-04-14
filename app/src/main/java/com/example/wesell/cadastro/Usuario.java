@@ -1,4 +1,4 @@
-package com.example.wesell;
+package com.example.wesell.cadastro;
 
 public class Usuario {
     private String nome;
