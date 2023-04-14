@@ -10,5 +10,6 @@
     <color name="gray">#7E7E7E</color>
     <color name="colorPrimary">#000000</color>
     <color name="red">#F44336</color>
-    <color name="colorAccent">#03A9F4</color>
+    <color name="colorAccent">#009EE3</color>
+    <color name="lavender">#8692f7</color>
 </resources>

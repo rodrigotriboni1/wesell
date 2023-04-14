@@ -40,7 +40,6 @@ public class RegisterActivity extends AppCompatActivity {
         nameField = findViewById(R.id.nameField);
         emailField = findViewById(R.id.emailField);
         passwordField = findViewById(R.id.passwordField);
-        uuidTextView = findViewById(R.id.uuidTextView);
         registerButton = findViewById(R.id.registerButton);
 
         mAuth = FirebaseAuth.getInstance();
@@ -48,7 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         UUID uuid = UUID.randomUUID();
         final String uuidString = uuid.toString();
-        uuidTextView.setText("UUID: " + uuidString);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
