@@ -19,9 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".cliente.ClienteActivity"></activity>
         <activity android:name=".cadastro.RegisterActivity"></activity>
         <activity android:name=".venda.AddVendaActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
 
     </application>
 

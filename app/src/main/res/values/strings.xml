@@ -11,4 +11,5 @@
     <string name="settings_name">Perfil</string>
     <string name="quantidade_venda_hint">Quantidade</string>
     <string name="btn_salvar_venda">Adicionar venda</string>
+    <string name="txt_nome_usuario">Ola Digao</string>
 </resources>

@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wesell.MainActivity;
 import com.example.wesell.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -30,7 +29,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHold
         this.listener = listener;
     }
 
-    public ClienteAdapter(MainActivity mainActivity, List<Cliente> clientes) {
+    public ClienteAdapter(ClienteActivity clienteActivity, List<Cliente> clientes) {
         mClientes = clientes;
         mListener = listener;
     }

@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.wesell.MainActivity;
+import com.example.wesell.cliente.ClienteActivity;
 import com.example.wesell.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -73,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                         Toast.makeText(RegisterActivity.this, "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
 
-                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                        Intent intent = new Intent(RegisterActivity.this, ClienteActivity.class);
                                         startActivity(intent);
                                         finish();
                                     } else {
