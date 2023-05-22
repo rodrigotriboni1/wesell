@@ -5,25 +5,36 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.example.wesell.cliente.ClienteActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.wesell.produtos.CriarProdutoActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    FloatingActionButton adicionarCliente;
+    private CardView clienteView;
+    private CardView vendasView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        adicionarCliente = findViewById(R.id.adicionarCliente);
+        clienteView = findViewById(R.id.clienteView);
+        vendasView = findViewById(R.id.vendasView);
 
-        adicionarCliente.setOnClickListener(new View.OnClickListener() {
+        clienteView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ClienteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        vendasView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CriarProdutoActivity.class);
                 startActivity(intent);
             }
         });

@@ -12,4 +12,14 @@
     <string name="quantidade_venda_hint">Quantidade</string>
     <string name="btn_salvar_venda">Adicionar venda</string>
     <string name="txt_nome_usuario">Ola Digao</string>
+
+
+    <string name="txt_saldo_conta">Saldo Conta</string>
+    <string name="txt_clientes">Clientes</string>
+    <string name="txt_produtos">Produtos</string>
+    <string name="txt_credit_card">Cartão de crédito</string>
+    <string name="txt_current_invoice">Fatura atual</string>
+    <string name="txt_currency_BR">Cambio</string>
+    <string name="txt_limit_card">Limite Cartão</string>
+    <string name="txt_split_purchases">Dividir pagamentos</string>
 </resources>
