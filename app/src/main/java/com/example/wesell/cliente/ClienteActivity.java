@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,11 +22,11 @@ import com.example.wesell.RecyclerItemClickListener;
 import com.example.wesell.venda.AddVendaActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,15 +64,37 @@ public class ClienteActivity extends AppCompatActivity {
         mdatabase = FirebaseDatabase.getInstance().getReference("vendas").child(userId);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("clientes").child(userId);
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                clienteList.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Cliente cliente = snapshot.getValue(Cliente.class);
-                    clienteList.add(cliente);
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+                Cliente cliente = dataSnapshot.getValue(Cliente.class);
+                clienteList.add(cliente);
+                clienteAdapter.notifyItemInserted(clienteList.size() - 1);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+                Cliente cliente = dataSnapshot.getValue(Cliente.class);
+                int index = getClienteIndex(cliente.getId());
+                if (index != -1) {
+                    clienteList.set(index, cliente);
+                    clienteAdapter.notifyItemChanged(index);
                 }
-                clienteAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                Cliente cliente = dataSnapshot.getValue(Cliente.class);
+                int index = getClienteIndex(cliente.getId());
+                if (index != -1) {
+                    clienteList.remove(index);
+                    clienteAdapter.notifyItemRemoved(index);
+                }
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+                // Não é necessário fazer nada neste caso.
             }
 
             @Override
@@ -102,8 +125,6 @@ public class ClienteActivity extends AppCompatActivity {
             }
         }));
     }
-
-
 
     private void adicionarCliente() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -148,6 +169,7 @@ public class ClienteActivity extends AppCompatActivity {
 
         builder.show();
     }
+
     private void excluirCliente(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Excluir cliente");
@@ -173,5 +195,13 @@ public class ClienteActivity extends AppCompatActivity {
         builder.show();
     }
 
+    private int getClienteIndex(String clienteId) {
+        for (int i = 0; i < clienteList.size(); i++) {
+            Cliente cliente = clienteList.get(i);
+            if (cliente.getId().equals(clienteId)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
-

@@ -10,6 +10,9 @@ public class Produto {
     private String nome;
     private double preco;
 
+    public Produto(){
+
+    }
 
     public Produto(String nome, double preco) {
         this.nome = nome;
@@ -24,12 +27,18 @@ public class Produto {
         return preco;
     }
 
-
     public void salvarProdutoNoFirebase() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = obterUsuarioAtual();
         String userId = user.getUid();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("produtos").child(userId);
+        DatabaseReference ref = obterReferenciaProduto(userId);
         ref.push().setValue(this);
     }
-}
 
+    private FirebaseUser obterUsuarioAtual() {
+        return FirebaseAuth.getInstance().getCurrentUser();
+    }
+
+    private DatabaseReference obterReferenciaProduto(String userId) {
+        return FirebaseDatabase.getInstance().getReference("produtos").child(userId);
+    }
+}

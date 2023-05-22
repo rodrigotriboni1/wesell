@@ -39,16 +39,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Cliente cliente = mClientes.get(position);
-        holder.textViewNome.setText(cliente.getNome());
-
-        holder.buttonDetalhes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mListener != null) {
-                    mListener.onClienteClick(cliente);
-                }
-            }
-        });
+        holder.bind(cliente);
     }
 
     @Override
@@ -56,14 +47,29 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ViewHold
         return mClientes.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textViewNome;
-        public Button buttonDetalhes;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView textViewNome;
+        private Button buttonDetalhes;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewNome = itemView.findViewById(R.id.textViewNome);
             buttonDetalhes = itemView.findViewById(R.id.buttonDetalhes);
+
+            buttonDetalhes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && mListener != null) {
+                        Cliente cliente = mClientes.get(position);
+                        mListener.onClienteClick(cliente);
+                    }
+                }
+            });
+        }
+
+        public void bind(Cliente cliente) {
+            textViewNome.setText(cliente.getNome());
         }
     }
 }

@@ -1,122 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:material="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".AddVendaActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nomeVendaTextInput"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textViewValorVenda"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nome_venda_hint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:text="Valor da Venda" />
 
-        <AutoCompleteTextView
-            android:id="@+id/editTextNomeVenda"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/valorVendaTextInput"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+    <EditText
+        android:id="@+id/editTextValorVenda"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/valor_venda_hint"
-        app:layout_constraintEnd_toEndOf="@id/nomeVendaTextInput"
-        app:layout_constraintStart_toStartOf="@id/nomeVendaTextInput"
-        app:layout_constraintTop_toBottomOf="@+id/nomeVendaTextInput">
+        android:inputType="numberDecimal" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextValorVenda"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionDone"
-            android:inputType="numberDecimal"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dataVendaTextInput"
-        android:onClick="showDatePickerDialog"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textViewProduto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/data_venda_hint"
-        app:layout_constraintEnd_toEndOf="@id/valorVendaTextInput"
-        app:layout_constraintStart_toStartOf="@id/valorVendaTextInput"
-        app:layout_constraintTop_toBottomOf="@+id/valorVendaTextInput">
+        android:text="Produto" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextDataVenda"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            android:onClick="showDatePickerDialog"
-            android:focusable="false"
-            android:hint="@string/data_venda_hint"
-            android:textIsSelectable="false" />
+    <Spinner
+        android:id="@+id/spinnerProdutos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/quantidadeVendaTextInput"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textViewDataVenda"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/quantidade_venda_hint"
-        app:layout_constraintEnd_toEndOf="@id/dataVendaTextInput"
-        app:layout_constraintStart_toStartOf="@id/dataVendaTextInput"
-        app:layout_constraintTop_toBottomOf="@+id/dataVendaTextInput">
+        android:text="Data da Venda" />
 
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
+        android:id="@+id/editTextDataVenda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false" />
+
+    <TextView
+        android:id="@+id/textViewQuantidadeVenda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quantidade da Venda" />
+
+    <EditText
         android:id="@+id/editTextQuantidadeVenda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:imeOptions="actionDone"
-        android:inputType="number"
-        />
+        android:inputType="number" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/buttonSalvarVenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Salvar Venda" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewVendas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSalvarVenda" />
-
-    <com.google.android.material.button.MaterialButton
-
-        android:id="@+id/buttonSalvarVenda"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_salvar_venda"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewVendas"
-        app:layout_constraintEnd_toEndOf="@id/recyclerViewVendas"
-        app:layout_constraintStart_toStartOf="@id/recyclerViewVendas"
-        android:layout_marginTop="16dp"
-        android:onClick="addSale"/>
+        android:layout_marginTop="16dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+</LinearLayout>

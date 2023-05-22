@@ -3,10 +3,10 @@ package com.example.wesell.venda;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,8 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wesell.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.wesell.produtos.Produto;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,9 +32,8 @@ import java.util.List;
 public class AddVendaActivity extends AppCompatActivity {
 
     private EditText editTextValorVenda;
-    private EditText editTextNomeVenda;
+    private Spinner spinnerProdutos;
     private EditText editTextDataVenda;
-
     private EditText editTextQuantidadeVenda;
     private Button buttonSalvarVenda;
     private RecyclerView recyclerViewVendas;
@@ -47,40 +45,29 @@ public class AddVendaActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private VendaAdapter vendaAdapter;
     private List<Venda> listaVendas;
+    private List<Produto> listaProdutos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_venda);
 
-        // Recebe o ID do cliente selecionado na MainActivity
         clienteId = getIntent().getStringExtra("clienteId");
 
         recyclerView = findViewById(R.id.recyclerViewVendas);
 
-        // Inicializa o Firebase Auth e o Firebase Database
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
-
-        // Configura as views da Activity
         editTextValorVenda = findViewById(R.id.editTextValorVenda);
-        editTextNomeVenda = findViewById(R.id.editTextNomeVenda);
+        spinnerProdutos = findViewById(R.id.spinnerProdutos);
         editTextDataVenda = findViewById(R.id.editTextDataVenda);
         editTextQuantidadeVenda = findViewById(R.id.editTextQuantidadeVenda);
         buttonSalvarVenda = findViewById(R.id.buttonSalvarVenda);
         recyclerViewVendas = findViewById(R.id.recyclerViewVendas);
 
-        // Configura o botão para salvar a venda
-        buttonSalvarVenda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                salvarVenda();
-            }
-        });
+        buttonSalvarVenda.setOnClickListener(view -> salvarVenda());
 
-        // Configura a RecyclerView para exibir as vendas do cliente
         listaVendas = new ArrayList<>();
         vendaAdapter = new VendaAdapter(listaVendas);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -92,7 +79,6 @@ public class AddVendaActivity extends AppCompatActivity {
         String userId = user.getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference("vendas").child(userId).child(clienteId);
 
-        // Carrega as vendas do cliente do Firebase Realtime Database
         mDatabase.orderByChild("clienteId").equalTo(clienteId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -110,31 +96,52 @@ public class AddVendaActivity extends AppCompatActivity {
             }
         });
 
-        // Configura o EditText para exibir o DatePickerDialog ao ser clicado
-        editTextDataVenda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar calendar = Calendar.getInstance();
-                int dia = calendar.get(Calendar.DAY_OF_MONTH);
-                int mes = calendar.get(Calendar.MONTH);
-                int ano = calendar.get(Calendar.YEAR);
+        editTextDataVenda.setOnClickListener(v -> {
+            final Calendar calendar = Calendar.getInstance();
+            int dia = calendar.get(Calendar.DAY_OF_MONTH);
+            int mes = calendar.get(Calendar.MONTH);
+            int ano = calendar.get(Calendar.YEAR);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(AddVendaActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String dataSelecionada = dayOfMonth + "/" + (month + 1) + "/" + year;
-                        editTextDataVenda.setText(dataSelecionada);
-                    }
-                }, ano, mes, dia);
-                datePickerDialog.show();
+            DatePickerDialog datePickerDialog = new DatePickerDialog(AddVendaActivity.this, (view, year, month, dayOfMonth) -> {
+                String dataSelecionada = dayOfMonth + "/" + (month + 1) + "/" + year;
+                editTextDataVenda.setText(dataSelecionada);
+            }, ano, mes, dia);
+            datePickerDialog.show();
+        });
+
+        // Load produtos from Firebase
+        listaProdutos = new ArrayList<>();
+        DatabaseReference produtosRef = FirebaseDatabase.getInstance().getReference("produtos").child(userId);
+        produtosRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listaProdutos.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Produto produto = dataSnapshot.getValue(Produto.class);
+                    listaProdutos.add(produto);
+                }
+
+                // Set up spinner adapter
+                List<String> nomesProdutos = new ArrayList<>();
+                for (Produto produto : listaProdutos) {
+                    nomesProdutos.add(produto.getNome());
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(AddVendaActivity.this, android.R.layout.simple_spinner_item, nomesProdutos);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerProdutos.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(AddVendaActivity.this, "Erro ao carregar os produtos", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    // Método para salvar a nova venda no Firebase Realtime Database
     private void salvarVenda() {
         String valorVenda = editTextValorVenda.getText().toString().trim();
-        String nomeCliente = editTextNomeVenda.getText().toString().trim();
+        String nomeProduto = spinnerProdutos.getSelectedItem().toString();
         String dataVenda = editTextDataVenda.getText().toString().trim();
         String quantidadeVenda = editTextQuantidadeVenda.getText().toString().trim();
 
@@ -142,36 +149,27 @@ public class AddVendaActivity extends AppCompatActivity {
             editTextValorVenda.setError("Informe o valor da venda");
             return;
         }
-        if (TextUtils.isEmpty(nomeCliente)) {
-            editTextNomeVenda.setError("Informe o nome do produto");
+        if (TextUtils.isEmpty(dataVenda)) {
+            editTextDataVenda.setError("Informe a data da venda");
+            return;
+        }
+        if (TextUtils.isEmpty(quantidadeVenda)) {
+            editTextQuantidadeVenda.setError("Informe a quantidade da venda");
             return;
         }
 
-// Cria um novo objeto Venda
         String vendaId = mDatabase.push().getKey();
+        Venda venda = new Venda(vendaId, clienteId, valorVenda, nomeProduto, dataVenda, quantidadeVenda);
 
-        String id = mDatabase.push().getKey();
-        Venda venda = new Venda(vendaId, clienteId, valorVenda, nomeCliente, dataVenda, quantidadeVenda);
-
-// Salva a nova venda no Firebase Realtime Database
         mDatabase.child(vendaId).setValue(venda)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        editTextValorVenda.setText("");
-                        editTextNomeVenda.setText("");
-                        editTextDataVenda.setText("");
-                        editTextQuantidadeVenda.setText("");
-
-                        // Limpa os campos de texto após a venda ser salva
-                        Toast.makeText(AddVendaActivity.this, "Venda salva com sucesso", Toast.LENGTH_SHORT).show();
-                    }
+                .addOnSuccessListener(aVoid -> {
+                    editTextValorVenda.setText("");
+                    editTextDataVenda.setText("");
+                    editTextQuantidadeVenda.setText("");
+                    Toast.makeText(AddVendaActivity.this, "Venda salva com sucesso", Toast.LENGTH_SHORT).show();
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddVendaActivity.this, "Erro ao salvar venda: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                .addOnFailureListener(e -> {
+                    Toast.makeText(AddVendaActivity.this, "Erro ao salvar venda: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 }
