@@ -3,6 +3,7 @@ package com.example.wesell.produtos;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +58,7 @@ public class ProdutoActivity extends AppCompatActivity {
         produtoAdapter = new ProdutoAdapter(produtoList);
         recyclerView.setAdapter(produtoAdapter);
         btnAdicionarProduto = findViewById(R.id.btnAdicionarProduto);
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user.getUid();
@@ -139,6 +141,7 @@ public class ProdutoActivity extends AppCompatActivity {
 
         final EditText editTextPreco = new EditText(this);
         editTextPreco.setHint("Preço do produto");
+        editTextPreco.setInputType(InputType.TYPE_CLASS_NUMBER);
         layout.addView(editTextPreco);
 
         dialogBuilder.setView(layout);

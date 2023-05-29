@@ -164,7 +164,6 @@ public class AddVendaActivity extends AppCompatActivity {
         mDatabase.child(vendaId).setValue(venda)
                 .addOnSuccessListener(aVoid -> {
                     editTextValorVenda.setText("");
-                    editTextDataVenda.setText("");
                     editTextQuantidadeVenda.setText("");
                     Toast.makeText(AddVendaActivity.this, "Venda salva com sucesso", Toast.LENGTH_SHORT).show();
                 })

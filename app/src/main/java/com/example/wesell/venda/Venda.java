@@ -8,7 +8,7 @@ public class Venda {
     private String vendaId;
     private String clienteId;
     private String valorVenda;
-    private String nomeCliente;
+    private String nomeProduto;
 
     private String dataVenda;
 
@@ -22,11 +22,11 @@ public class Venda {
     }
 
 
-    public Venda(String vendaId, String clienteId, String valorVenda, String nomeCliente, String dataVenda, String quantidadeVenda) {
+    public Venda(String vendaId, String clienteId, String valorVenda, String nomeProduto, String dataVenda, String quantidadeVenda) {
         this.vendaId = vendaId;
         this.clienteId = clienteId;
         this.valorVenda = valorVenda;
-        this.nomeCliente = nomeCliente;
+        this.nomeProduto = nomeProduto;
         this.dataVenda = dataVenda;
         this.quantidadeVenda = quantidadeVenda;
     }
@@ -63,19 +63,20 @@ public class Venda {
         this.valorVenda = valorVenda;
     }
 
-    public CharSequence getNomeCliente() {
-        return nomeCliente;
+    public CharSequence getNomeProduto() {
+        return nomeProduto;
     }
 
-    public void setNomeCliente(String nomeCliente) {
-        this.nomeCliente = nomeCliente;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
     }
     public String getQuantidadeVenda() {
-        return valorVenda;
+        return quantidadeVenda;
     }
 
     public void setQuantidadeVenda(String quantidadeVenda) {
         this.quantidadeVenda = quantidadeVenda;
     }
+
 
 }

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -38,9 +37,10 @@
                 app:layout_constraintBottom_toBottomOf="@id/containerCirculo"/>
 
             <TextView
+                android:id="@+id/txtNomeUsuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_nome_usuario"
+                android:text="Ola, Usuário"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -83,17 +83,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
+            android:id="@+id/txtTotalVendas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:text="@string/txt_saldo_conta"
-            android:textSize="23sp"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_margin="20dp"/>
+            android:textSize="23sp"
+            android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/vendasView"
@@ -131,7 +131,6 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewVendas"
@@ -180,7 +179,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_cliente" />
-
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

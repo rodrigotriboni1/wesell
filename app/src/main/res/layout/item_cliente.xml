@@ -32,7 +32,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorAccent"
-                android:text="DETALHES" />
+                android:text="DETALHES"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 

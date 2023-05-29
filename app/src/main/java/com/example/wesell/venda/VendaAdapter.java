@@ -43,7 +43,7 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Venda venda = vendas.get(position);
-        holder.textViewNomeCliente.setText(venda.getNomeCliente());
+        holder.textViewProduto.setText(venda.getNomeProduto());
         holder.textViewValorVenda.setText(venda.getValorVenda());
         holder.TextViewDataVenda.setText(venda.getDataVenda());
         holder.TextViewQuantidadeVenda.setText(venda.getQuantidadeVenda());
@@ -80,7 +80,7 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView textViewNomeCliente;
+        public TextView textViewProduto;
         public TextView textViewValorVenda;
 
         public TextView TextViewDataVenda;
@@ -91,10 +91,10 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.ViewHolder> 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            textViewNomeCliente = itemView.findViewById(R.id.textViewProduto);
+            textViewProduto = itemView.findViewById(R.id.textViewProduto);
             textViewValorVenda = itemView.findViewById(R.id.textViewValor);
-            TextViewDataVenda = itemView.findViewById(R.id.TextViewDataVenda);
-            TextViewQuantidadeVenda = itemView.findViewById(R.id.TextViewQuantidadeVenda);
+            TextViewDataVenda = itemView.findViewById(R.id.textViewDataVenda);
+            TextViewQuantidadeVenda = itemView.findViewById(R.id.textViewQuantidadeVenda);
             buttonExcluirVenda = itemView.findViewById(R.id.buttonExcluirVenda);
 
 
