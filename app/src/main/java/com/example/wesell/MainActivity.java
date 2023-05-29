@@ -8,12 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.wesell.cliente.ClienteActivity;
-import com.example.wesell.produtos.CriarProdutoActivity;
+import com.example.wesell.produtos.ProdutoActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private CardView clienteView;
     private CardView vendasView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         vendasView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CriarProdutoActivity.class);
+                Intent intent = new Intent(MainActivity.this, ProdutoActivity.class);
                 startActivity(intent);
             }
         });

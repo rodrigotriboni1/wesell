@@ -23,8 +23,8 @@
         <activity android:name=".cadastro.RegisterActivity"></activity>
         <activity android:name=".venda.AddVendaActivity"></activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".produtos.CriarProdutoActivity"></activity>
-        <activity android:name=".produtos.AddProdutoActivity"></activity>
+        <activity android:name=".detalhes.DetalhesProdutoActivity"></activity>
+        <activity android:name=".produtos.ProdutoActivity"></activity>
 
     </application>
 
