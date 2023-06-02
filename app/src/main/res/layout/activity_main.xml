@@ -40,7 +40,7 @@
                 android:id="@+id/txtNomeUsuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ola, Usuário"
+                android:text="Olá, Usuário"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -174,11 +174,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewClientes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_cliente" />
-
     </LinearLayout>
+
+
 </androidx.core.widget.NestedScrollView>

@@ -7,86 +7,86 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/pagebkg"
+    android:background="@color/colorAccent"
     tools:context=".cadastro.LoginActivity">
 
-    <LinearLayout
+    <!-- Adicionei um espaço vazio no topo -->
+    <Space
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="32dp" />
 
-        <!-- Placeholder for any top content that you want to add -->
-
-    </LinearLayout>
+    <!-- Adicione o logotipo da sua empresa -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ecojuices_logo"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Logo da EcoJuices" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
-        android:layout_marginEnd="0dp"
-        tools:layout_marginBottom="0dp">
+        android:layout_margin="24dp"
+        app:cardCornerRadius="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|fill_horizontal|fill_vertical|end"
             android:orientation="vertical"
-            android:padding="34dp">
+            android:padding="24dp">
 
-            <EditText
-                android:id="@+id/emailField"
+            <!-- Utilizei TextInputLayout para melhorar a usabilidade dos campos de entrada -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailFieldLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/ic_baseline_person_pin_24"
-                android:drawablePadding="8dp"
-                android:hint="Email"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:layout_height="wrap_content"
+                android:hint="Email">
 
-            <EditText
-                android:id="@+id/passwordField"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Utilizei o mesmo estilo para o campo de senha -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordFieldLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/ic_baseline_lock_24"
-                android:drawablePadding="8dp"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:padding="8dp"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Senha">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Botão de Login -->
             <Button
                 android:id="@+id/signInButton"
                 android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:backgroundTint="@color/colorAccent"
                 android:text="Login"
+                android:textColor="@android:color/white"
                 android:textSize="18sp"
                 app:cornerRadius="10dp" />
 
+            <!-- Botão de Registro -->
             <Button
                 android:id="@+id/signUpButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginTop="16dp"
                 android:backgroundTint="@color/colorAccent"
                 android:text="Registrar-se"
+                android:textColor="@android:color/white"
                 android:textSize="18sp"
                 app:cornerRadius="10dp" />
 

@@ -5,104 +5,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pagebkg"
+    android:background="@color/colorAccent"
     tools:context=".cadastro.RegisterActivity">
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ecojuices_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:contentDescription="Logo" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        tools:layout_marginBottom="0dp"
-        android:padding="24dp">
+        android:layout_below="@id/logoImageView"
+        android:layout_margin="32dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
-            android:layout_alignParentBottom="true">
+            android:padding="16dp">
 
             <EditText
                 android:id="@+id/nameField"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="30dp"
+                android:layout_height="wrap_content"
+                android:hint="Nome"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/ic_baseline_person_24"
-                android:drawablePadding="8dp"
-                android:hint="Name"
-                android:padding="8dp"
-                android:textColor="@color/black" />
+                android:drawableStart="@drawable/ic_baseline_person_24"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/emailField"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/ic_baseline_email_24"
-                android:drawablePadding="8dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:hint="Email"
-                android:padding="8dp"
-                android:textColor="@color/black" />
-
+                android:background="@drawable/custom_edittext"
+                android:drawableStart="@drawable/ic_baseline_email_24"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/signup_username"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Nome de Usuário"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/ic_baseline_person_pin_24"
-                android:drawablePadding="8dp"
-                android:hint="Username"
-                android:padding="8dp"
-                android:textColor="@color/black" />
+                android:drawableStart="@drawable/ic_baseline_person_pin_24"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/passwordField"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Senha"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/ic_baseline_lock_24"
-                android:drawablePadding="8dp"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:padding="8dp"
-                android:textColor="@color/black" />
+                android:drawableStart="@drawable/ic_baseline_lock_24"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:inputType="textPassword" />
 
             <Button
                 android:id="@+id/registerButton"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="30dp"
-                android:backgroundTint="@color/colorAccent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:text="Confirmar"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:backgroundTint="@color/colorAccent"
+                android:padding="12dp"
+                android:gravity="center" />
 
             <TextView
-                android:id="@+id/LoginActivity"
+                android:id="@+id/loginTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:text="Você já tem uma conta? Faça login"
+                android:layout_marginTop="16dp"
+                android:text="Já tem uma conta? Faça login"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:onClick="onLoginClick" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

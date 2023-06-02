@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Wesell</string>
+    <string name="app_name">EcoJuices</string>
     <string name="nome_cliente_padrao">nome_cliente_padrao</string>
     <string name="descricao_icone_cliente">descricao_icone_cliente</string>
     <string name="add_client">adicionar cliente</string>
