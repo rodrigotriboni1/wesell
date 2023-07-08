@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,6 +59,10 @@ public class ProdutoActivity extends AppCompatActivity {
         produtoAdapter = new ProdutoAdapter(produtoList);
         recyclerView.setAdapter(produtoAdapter);
         btnAdicionarProduto = findViewById(R.id.btnAdicionarProduto);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

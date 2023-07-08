@@ -11,20 +11,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wesell"
         android:enableOnBackInvokedCallback="true">
-        <activity android:name=".cadastro.LoginActivity"
-            android:exported="false">
+
+        <!-- Defina a LoginActivity como a atividade de lançamento padrão -->
+        <activity
+            android:name=".cadastro.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Outras atividades do seu aplicativo -->
         <activity android:name=".cliente.ClienteActivity"></activity>
         <activity android:name=".cadastro.RegisterActivity"></activity>
         <activity android:name=".venda.AddVendaActivity"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".detalhes.DetalhesProdutoActivity"></activity>
         <activity android:name=".produtos.ProdutoActivity"></activity>
+        <activity android:name=".cadastro.LoginActivity"></activity>
 
     </application>
 
